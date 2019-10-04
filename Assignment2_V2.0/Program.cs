@@ -209,18 +209,37 @@ namespace _2019_Fall_Assignment2
 			return result;
 		}
 
-		public static bool ValidPalindrome(string s)
-		{
-			try
-			{
-				// Write your code here
-			}
-			catch
-			{
-				Console.WriteLine("Exception occured while computing ValidPalindrome()");
-			}
+        public static bool ValidPalindrome(string s)
+        {
+            int left = 0, right = s.Length - 1;
+            int numSkip = 0;
 
-			return false;
-		}
-	}
+            while (left < right)
+            {
+                if (s[left] != s[right])
+                {
+                    if (numSkip == 0)
+                    {
+                        left += 1;
+                        numSkip += 1;
+                        continue;
+                    }
+                    else if (numSkip == 1)
+                    {
+                        left -= 1;     //trace back
+                        right -= 1;
+                        numSkip += 1;
+                        continue;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                left += 1;
+                right -= 1;
+            }
+            return true;
+        }
+    }
 }
