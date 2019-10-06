@@ -43,7 +43,7 @@ namespace _2019_Fall_Assignment2
 			Console.WriteLine("Squares of the array in sorted order is:");
 			DisplayArray(sortedSquares);
 			Console.Write("\n");
-            Console.ReadLine();
+           
 
 			string s = "abca";
 			if (ValidPalindrome(s))
@@ -54,7 +54,8 @@ namespace _2019_Fall_Assignment2
 			{
 				Console.WriteLine("The given string \"{0}\" CANNOT be made PALINDROME", s);
 			}
-		}
+            Console.ReadLine();
+        }
 
 		public static void DisplayArray(int[] a)
 		{
@@ -178,8 +179,6 @@ namespace _2019_Fall_Assignment2
                 for (int i = 1; i <= keyboard.Length; i++)
                 {
                     dict.Add(keyboard[i - 1], i);
-                    // Console.WriteLine(dict[keyboard[i - 1]]);
-
                 }
                 int pv = 0;
                 for (int i = 0; i < word.Length; i++)
@@ -188,11 +187,8 @@ namespace _2019_Fall_Assignment2
                     pk = dict[word[i]];
                     count += Math.Abs(pk - pv);
                     pv = pk;
-
-
                 }
                 return count-1;
-               // Console.ReadLine();
             }
 			catch
 			{
