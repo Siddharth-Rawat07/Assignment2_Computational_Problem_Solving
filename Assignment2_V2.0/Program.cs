@@ -68,7 +68,7 @@ namespace _2019_Fall_Assignment2
 		}
 
 		public static void Display2DArray(int[,] a)
-		{
+		{// displays the inverted image
 			for (int i = 0; i < a.GetLength(0); i++)
 			{
 				for (int j = 0; j < a.GetLength(1); j++)
@@ -80,7 +80,7 @@ namespace _2019_Fall_Assignment2
 		}
 
         public int searchInsert(int[] nums, int target)
-        {
+        {//return index of the target value or index of where to insert the target value
 
             if (target > nums[nums.Length - 1])
             {
@@ -221,7 +221,7 @@ namespace _2019_Fall_Assignment2
 		}
 
         public int[,] FlipAndInvertImage(int[,] A)
-        {
+        {//flips the array input
             try
             {
                 for (int i = 0; i < A.GetLength(0); i++)
@@ -258,7 +258,7 @@ namespace _2019_Fall_Assignment2
         }
 
         public int MinMeetingRooms(int[,] A)
-        {
+        {// Find minimum number of conference rooms required given meeting intervals
             int n = A.GetLength(0);
             int[] arr = getColumn(A, 0);
             int[] dep = getColumn(A, 1);
