@@ -43,6 +43,7 @@ namespace _2019_Fall_Assignment2
 			Console.WriteLine("Squares of the array in sorted order is:");
 			DisplayArray(sortedSquares);
 			Console.Write("\n");
+            Console.ReadLine();
 
 			string s = "abca";
 			if (ValidPalindrome(s))
@@ -130,8 +131,36 @@ namespace _2019_Fall_Assignment2
 		{
 			try
 			{
-				// Write your code here
-			}
+                int max = 0;
+                Dictionary<int, int> InputArray = new Dictionary<int, int>();
+                for (int i = 0; i <= A.Length - 1; i++)
+                {
+                    if (InputArray.ContainsKey(A[i]) == false)
+                    {
+                        InputArray.Add(A[i], 1);
+                    }
+                    else
+                    {
+                        InputArray[A[i]] = 2;
+                    }
+                }
+                foreach (var pair in InputArray)
+                {
+                    if (pair.Key > max && pair.Value == 1)
+                    {
+                        max = pair.Key;
+                        
+                    }
+                }
+                if (max > 0)
+                {
+                    return max;
+                }
+                else
+                {
+                    return -1;
+                }
+            }
 			catch
 			{
 				Console.WriteLine("Exception occured while computing LargestUniqueNumber()");
@@ -144,8 +173,27 @@ namespace _2019_Fall_Assignment2
 		{
 			try
 			{
-				// Write your code here
-			}
+                int count = 0;
+                Dictionary<char, int> dict = new Dictionary<char, int>();
+                for (int i = 1; i <= keyboard.Length; i++)
+                {
+                    dict.Add(keyboard[i - 1], i);
+                    // Console.WriteLine(dict[keyboard[i - 1]]);
+
+                }
+                int pv = 0;
+                for (int i = 0; i < word.Length; i++)
+                {
+                    int pk = 0;
+                    pk = dict[word[i]];
+                    count += Math.Abs(pk - pv);
+                    pv = pk;
+
+
+                }
+                return count-1;
+               // Console.ReadLine();
+            }
 			catch
 			{
 				Console.WriteLine("Exception occured while computing CalculateTime()");
