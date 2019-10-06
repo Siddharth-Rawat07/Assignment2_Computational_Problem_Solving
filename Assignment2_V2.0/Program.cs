@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace _2019_Fall_Assignment2
 {
@@ -10,9 +11,10 @@ namespace _2019_Fall_Assignment2
 	{
 		public static void Main(string[] args)
 		{
-			int target = 5;
+            Program xyz = new Program();
+            int target = 5;
 			int[] nums = { 1, 3, 5, 6 };
-			Console.WriteLine("Position to insert {0} is = {1}\n", target, SearchInsert(nums, target));
+			Console.WriteLine("Position to insert {0} is = {1}\n", target, xyz.searchInsert(nums, target));
 
 			int[] nums1 = { 1, 2, 2, 1 };
 			int[] nums2 = { 2, 2 };
@@ -29,13 +31,13 @@ namespace _2019_Fall_Assignment2
 			Console.WriteLine("Time taken to type with one finger = {0}\n", CalculateTime(keyboard, word));
 
 			int[,] image = { { 1, 1, 0 }, { 1, 0, 1 }, { 0, 0, 0 } };
-			int[,] flipAndInvertedImage = FlipAndInvertImage(image);
+			int[,] flipAndInvertedImage = xyz.FlipAndInvertImage(image);
 			Console.WriteLine("The resulting flipped and inverted image is:\n");
 			Display2DArray(flipAndInvertedImage);
 			Console.Write("\n");
 
 			int[,] intervals = { { 0, 30 }, { 5, 10 }, { 15, 20 } };
-			int minMeetingRooms = MinMeetingRooms(intervals);
+			int minMeetingRooms = xyz.MinMeetingRooms(intervals);
 			Console.WriteLine("Minimum meeting rooms needed = {0}\n", minMeetingRooms);
 
 			int[] arr = { -4, -1, 0, 3, 10 };
@@ -77,21 +79,40 @@ namespace _2019_Fall_Assignment2
 			}
 		}
 
-		public static int SearchInsert(int[] nums, int target)
-		{
-			try
-			{
-				// Write your code here
-			}
-			catch
-			{
-				Console.WriteLine("Exception occured while computing SearchInsert()");
-			}
+        public int searchInsert(int[] nums, int target)
+        {
 
-			return 0;
-		}
+            if (target > nums[nums.Length - 1])
+            {
 
-		public static int[] Intersect(int[] nums1, int[] nums2)
+                return nums.Length;
+
+            }
+            int l = 0;
+            int r = nums.Length - 1;
+            while (l < r)
+            {
+
+                int m = l + (r - l) / 2;
+
+                if (target > nums[m])
+                {
+
+                    l = m + 1;
+
+                }
+                else
+                {
+
+                    r = m;
+
+                }
+
+            }
+            return l;
+        }
+
+        public static int[] Intersect(int[] nums1, int[] nums2)
 		{
             //Index all entries from shorter array in a map
             var firstnumbers = new Dictionary<int, int>();
@@ -199,35 +220,83 @@ namespace _2019_Fall_Assignment2
 			return 0;
 		}
 
-		public static int[,] FlipAndInvertImage(int[,] A)
-		{
-			try
-			{
-				// Write your code here
-			}
-			catch
-			{
-				Console.WriteLine("Exception occured while computing FlipAndInvertImage()");
-			}
+        public int[,] FlipAndInvertImage(int[,] A)
+        {
+            try
+            {
+                for (int i = 0; i < A.GetLength(0); i++)
+                {
+                    int start = 0;
+                    int end = A.GetLength(1) - 1;
+                    while (start <= end)
+                    {
+                        int temp = A[i, start];
+                        A[i, start] = A[i, end];
+                        A[i, end] = temp;
+                        if (start == end)
+                        {
+                            A[i, start] = A[i, start] == 0 ? 1 : 0;
+                        }
+                        else
+                        {
+                            A[i, start] = A[i, start] == 0 ? 1 : 0;
+                            A[i, end] = A[i, end] == 0 ? 1 : 0;
+                        }
 
-			return new int[,] { };
-		}
+                        start += 1;
+                        end -= 1;
+                    }
+                }
 
-		public static int MinMeetingRooms(int[,] intervals)
-		{
-			try
-			{
-				// Write your code here
-			}
-			catch
-			{
-				Console.WriteLine("Exception occured while computing MinMeetingRooms()");
-			}
+            }
+            catch
+            {
+                Console.WriteLine("Exception occured while computing FlipAndInvertImage()");
+            }
 
-			return 0;
-		}
+            return A;
+        }
 
-		public static int[] SortedSquares(int[] A)
+        public int MinMeetingRooms(int[,] A)
+        {
+            int n = A.GetLength(0);
+            int[] arr = getColumn(A, 0);
+            int[] dep = getColumn(A, 1);
+            Array.Sort(arr);
+            Array.Sort(dep);
+
+            int plat_needed = 1, result = 1;
+            int i = 1, j = 0;
+
+            while (i < n && j < n)
+            {
+
+                if (arr[i] <= dep[j])
+                {
+                    plat_needed++;
+                    i++;
+
+                    if (plat_needed > result)
+                        result = plat_needed;
+                }
+
+                else
+                {
+                    plat_needed--;
+                    j++;
+                }
+            }
+
+            return result;
+        }
+        public int[] getColumn(int[,] matrix, int columnNumber)
+        {
+            return Enumerable.Range(0, matrix.GetLength(0))
+                    .Select(x => matrix[x, columnNumber])
+                    .ToArray();
+        }
+
+        public static int[] SortedSquares(int[] A)
 		{
 			int[] result = new int[A.Length];
 
