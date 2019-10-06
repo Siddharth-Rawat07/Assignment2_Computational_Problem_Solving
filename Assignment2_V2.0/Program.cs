@@ -93,7 +93,8 @@ namespace _2019_Fall_Assignment2
 
 		public static int[] Intersect(int[] nums1, int[] nums2)
 		{
-			var firstnumbers = new Dictionary<int, int>();
+            //Index all entries from shorter array in a map
+            var firstnumbers = new Dictionary<int, int>();
 
 			foreach (var num in nums1)
 			{
@@ -106,8 +107,8 @@ namespace _2019_Fall_Assignment2
 					firstnumbers.Add(num, 1);
 				}
 			}
-
-			var answer = new List<int>();
+            //Find intersection between map and second array
+            var answer = new List<int>();
 			foreach (var num in nums2)
 			{
 				if (firstnumbers.ContainsKey(num))
