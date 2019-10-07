@@ -298,36 +298,23 @@ namespace _2019_Fall_Assignment2
 
         public static int[] SortedSquares(int[] A)
 		{
-			int[] result = new int[A.Length];
-
-			int start = 0, end = A.Length - 1;
-			int index = A.Length - 1;
-
-			while (start <= end)
-			{
-				int frontSquare = A[start] * A[start];
-				int rearSquare = A[end] * A[end];
-
-				if (frontSquare < rearSquare)
-				{
-					result[index--] = rearSquare;
-					end--;
-				}
-				else
-				{
-					result[index--] = frontSquare;
-					start++;
-				}
-
-			}
-			return result;
+            //Create a list of integers
+            List<int> SquaredNumbers = new List<int>(); 
+            //for loop to go through the array
+            foreach (int a in A)
+            {
+                int absoluteValue = Math.Abs(a); //getting the absolute values of the numbers
+                SquaredNumbers.Add(absoluteValue * absoluteValue); //adding the squared absolute value to the list
+            }
+            SquaredNumbers.Sort(); //ordering the list
+            return SquaredNumbers.ToArray();
 		}
 
         public static bool ValidPalindrome(string s)
         {
             int left = 0, right = s.Length - 1;
             int numSkip = 0;
-
+            // loop to match from begining with end
             while (left < right)
             {
                 if (s[left] != s[right])
@@ -340,11 +327,12 @@ namespace _2019_Fall_Assignment2
                     }
                     else if (numSkip == 1)
                     {
-                        left -= 1;     //trace back
+                        left -= 1;     //trace it back
                         right -= 1;
                         numSkip += 1;
                         continue;
                     }
+                    // tried skipping a char from both side but failed.
                     else
                     {
                         return false;
