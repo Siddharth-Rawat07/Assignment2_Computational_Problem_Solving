@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -68,7 +68,7 @@ namespace _2019_Fall_Assignment2
 		}
 
 		public static void Display2DArray(int[,] a)
-		{// displays the inverted image
+		{
 			for (int i = 0; i < a.GetLength(0); i++)
 			{
 				for (int j = 0; j < a.GetLength(1); j++)
@@ -80,7 +80,7 @@ namespace _2019_Fall_Assignment2
 		}
 
         public int searchInsert(int[] nums, int target)
-        {//return index of the target value or index of where to insert the target value
+        {
 
             if (target > nums[nums.Length - 1])
             {
@@ -155,6 +155,7 @@ namespace _2019_Fall_Assignment2
 			try
 			{
                 int max = 0;
+		//Creating a dictionary including unique numbers and occurrence.		
                 Dictionary<int, int> InputArray = new Dictionary<int, int>();
                 for (int i = 0; i <= A.Length - 1; i++)
                 {
@@ -167,6 +168,7 @@ namespace _2019_Fall_Assignment2
                         InputArray[A[i]] = 2;
                     }
                 }
+		//Parsing Dictionary to findout maximum number where number of occurrence is 1
                 foreach (var pair in InputArray)
                 {
                     if (pair.Key > max && pair.Value == 1)
@@ -175,10 +177,12 @@ namespace _2019_Fall_Assignment2
                         
                     }
                 }
+		//Returning Maximum value if any
                 if (max > 0)
                 {
                     return max;
                 }
+		//Else returing -1
                 else
                 {
                     return -1;
@@ -197,12 +201,14 @@ namespace _2019_Fall_Assignment2
 			try
 			{
                 int count = 0;
+		//Creating Dictinary with keyboard elements and their index value
                 Dictionary<char, int> dict = new Dictionary<char, int>();
                 for (int i = 1; i <= keyboard.Length; i++)
                 {
                     dict.Add(keyboard[i - 1], i);
                 }
                 int pv = 0;
+		//Calculating absolute value to move from one keyboard element to another
                 for (int i = 0; i < word.Length; i++)
                 {
                     int pk = 0;
@@ -221,7 +227,7 @@ namespace _2019_Fall_Assignment2
 		}
 
         public int[,] FlipAndInvertImage(int[,] A)
-        {//flips the array input
+        {
             try
             {
                 for (int i = 0; i < A.GetLength(0); i++)
@@ -258,7 +264,7 @@ namespace _2019_Fall_Assignment2
         }
 
         public int MinMeetingRooms(int[,] A)
-        {// Find minimum number of conference rooms required given meeting intervals
+        {
             int n = A.GetLength(0);
             int[] arr = getColumn(A, 0);
             int[] dep = getColumn(A, 1);
@@ -298,23 +304,36 @@ namespace _2019_Fall_Assignment2
 
         public static int[] SortedSquares(int[] A)
 		{
-            //Create a list of integers
-            List<int> SquaredNumbers = new List<int>(); 
-            //for loop to go through the array
-            foreach (int a in A)
-            {
-                int absoluteValue = Math.Abs(a); //getting the absolute values of the numbers
-                SquaredNumbers.Add(absoluteValue * absoluteValue); //adding the squared absolute value to the list
-            }
-            SquaredNumbers.Sort(); //ordering the list
-            return SquaredNumbers.ToArray();
+			int[] result = new int[A.Length];
+
+			int start = 0, end = A.Length - 1;
+			int index = A.Length - 1;
+
+			while (start <= end)
+			{
+				int frontSquare = A[start] * A[start];
+				int rearSquare = A[end] * A[end];
+
+				if (frontSquare < rearSquare)
+				{
+					result[index--] = rearSquare;
+					end--;
+				}
+				else
+				{
+					result[index--] = frontSquare;
+					start++;
+				}
+
+			}
+			return result;
 		}
 
         public static bool ValidPalindrome(string s)
         {
             int left = 0, right = s.Length - 1;
             int numSkip = 0;
-            // loop to match from begining with end
+
             while (left < right)
             {
                 if (s[left] != s[right])
@@ -327,12 +346,11 @@ namespace _2019_Fall_Assignment2
                     }
                     else if (numSkip == 1)
                     {
-                        left -= 1;     //trace it back
+                        left -= 1;     //trace back
                         right -= 1;
                         numSkip += 1;
                         continue;
                     }
-                    // tried skipping a char from both side but failed.
                     else
                     {
                         return false;
