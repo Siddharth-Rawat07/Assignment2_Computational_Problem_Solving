@@ -363,3 +363,13 @@ namespace _2019_Fall_Assignment2
         }
     }
 }
+
+/*
+
+Self Reflection:
+- This assignment had a wide variety of challenging problem which pushed us to explore variuos data structures and algorithms
+- Working with Dictionaries made our codes very efficient as it made handling of arrays and key value pairs very easy
+- This assignment developed our familiarity with problem solvings, algorithms and usage of simple data structure like dictionaries, strings & arrays
+- This assignment also gave us hands on experience of collaboarting on Github with simultaneous commits and the importance of commenting while merging individual codes.
+
+*/
